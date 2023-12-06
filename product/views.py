@@ -1,11 +1,15 @@
 from rest_framework import status
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from .forms import MyUserRegistrationForm 
 from .models import Category, Product
+from django.contrib.auth import logout
 from .serializers import ProductSerializer, CategorySerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 @api_view(['GET', 'POST'])
 def cartitems(request):
@@ -82,3 +86,36 @@ def categories(request):
 def index(request):
     # Replace this with the logic for your index view
     return Response({'message': 'This is the index page'})
+
+@api_view(['GET'])
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page, or wherever you want
+    return redirect('homepage') 
+
+@api_view(['POST'])
+def register_view(request):
+    if request.method == 'POST':
+        form = MyUserRegistrationForm(request.data)
+        if form.is_valid():
+            user = form.save()
+            # No need to call user.save() again as form.save() already does this
+            return Response({'message': 'Registration successful. Please log in.'}, status=201)
+        else:
+            return Response(form.errors, status=400)
+
+    return Response({'message': 'Invalid request method.'}, status=405)
+
+@api_view(['GET', 'POST'])
+def contact_us(request):
+    if request.method == 'GET':
+        # Logic for GET request (e.g., return contact form data)
+        return Response({'message': 'GET request to contact_us'})
+    elif request.method == 'POST':
+        # Logic for POST request (e.g., handle form submission)
+        # Assuming you send data in JSON format from your React app
+        contact_data = request.data
+        # Process the contact_data as needed
+        return Response({'message': 'POST request to contact_us received', 'data': contact_data})
+    else:
+        return Response({'error': 'Invalid request method'}, status=405)

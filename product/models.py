@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)
+    return redirect('homepage')  # Redirect to the homepage after logout
+
 
 class MyUser(AbstractUser):
     pass
-
+  
+  
 class Product(models.Model):
     
     category = models.ForeignKey('Category',on_delete=models.CASCADE, related_name='products')
@@ -21,4 +29,4 @@ class Category(models.Model):
     def __str__(self):
         return f'{self.name}'
     
-
+  
