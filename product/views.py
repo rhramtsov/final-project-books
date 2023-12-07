@@ -1,14 +1,14 @@
 from rest_framework import status
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from .forms import MyUserRegistrationForm 
-from .models import Category, Product
+from django.db.models import Q
+from .models import Category, Product, MyUser
 from django.contrib.auth import logout
 from .serializers import ProductSerializer, CategorySerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+import json
 
 
 @api_view(['GET', 'POST'])
@@ -94,17 +94,34 @@ def logout_view(request):
     return redirect('homepage') 
 
 @api_view(['POST'])
-def register_view(request):
-    if request.method == 'POST':
-        form = MyUserRegistrationForm(request.data)
-        if form.is_valid():
-            user = form.save()
-            # No need to call user.save() again as form.save() already does this
-            return Response({'message': 'Registration successful. Please log in.'}, status=201)
-        else:
-            return Response(form.errors, status=400)
+def register(request):
+    try:
+        raw_body=request.body.decode('utf-8')
+        data=json.loads(raw_body)
+        username=data.get('username', None)
+        email=data.get('email', None)
+        password=data.get('password', None)
 
-    return Response({'message': 'Invalid request method.'}, status=405)
+        if username is None or email is None or password is None:
+            return Response({'message': 'missing required fields: username, email, password'}, status=400)
+        existing_username = MyUser.objects.filter(username=username)
+
+        if len(existing_username) > 0:
+            return Response({'message': 'username already exist'}, status=400)
+        
+        existing_email = MyUser.objects.filter(email=email)
+
+        if len(existing_email) > 0:
+            return Response({'message': 'email already exist'}, status=400)
+        
+        user=MyUser(username=username, email=email)
+        user.set_password(password)
+        user.save()
+
+        return Response({'message': 'user created'}, status=201)
+    except Exception as e:
+        print(e)
+        return Response({'message': 'server error'}, status=500)
 
 @api_view(['GET', 'POST'])
 def contact_us(request):

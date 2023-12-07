@@ -9,7 +9,8 @@ def logout_view(request):
 
 
 class MyUser(AbstractUser):
-    pass
+    def __str__(self):
+        return f'{self.username}'
   
   
 class Product(models.Model):

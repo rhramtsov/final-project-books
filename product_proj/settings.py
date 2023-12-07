@@ -12,7 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import logging
 import os
+# from decouple import Csv, config
+
+logging.basicConfig(level=logging.DEBUG)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "auction.settings")
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -162,3 +168,15 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings
+
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_FILE_PATH = "sent_emails"
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'theonlineartgalleryhl@gmail.com'
+# EMAIL_HOST_PASSWORD = 'dflhabzpaqlpfsjq'
+# DEFAULT_FROM_EMAIL = 'theonlineartgalleryhl@gmail.com'
+# SERVER_EMAIL = 'theonlineartgalleryhl@gmail.com'
