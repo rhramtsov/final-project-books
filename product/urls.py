@@ -8,7 +8,6 @@ from .views import logout_view
 
 
 
-
 urlpatterns = [
     path('', views.index, name='homepage'),
     path('all-books', views.products, name="all_books"), 
@@ -22,6 +21,7 @@ urlpatterns = [
     path('contact-us', views.contact_us, name='contact_us'),
 ]
 
-# tt
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

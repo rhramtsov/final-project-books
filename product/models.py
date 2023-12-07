@@ -31,3 +31,4 @@ class Category(models.Model):
         return f'{self.name}'
     
   
+image = models.ImageField(upload_to='product_images/', null=True)
