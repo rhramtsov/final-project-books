@@ -14,6 +14,7 @@ urlpatterns = [
     path('art-books', views.products, name="art_books"), 
     path('fiction-books', views.products, name="fiction_books"), 
     path('children-books', views.products, name="children_books"), 
+    path('sale', views.products, name="sale"), 
     path('product/<id>', views.product_detail, name="product_detail"), 
     path('cartitems', views.cartitems, name="cartitems"),    
     path('logout', logout_view, name='logout'),
