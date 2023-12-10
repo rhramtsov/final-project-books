@@ -9,7 +9,7 @@ from .views import logout_view
 
 
 urlpatterns = [
-    path('/', views.index, name='homepage'),
+    path('home', views.index, name='homepage'),
     path('all-books', views.products, name="all_books"), 
     path('art-books', views.products, name="art_books"), 
     path('fiction-books', views.products, name="fiction_books"), 
