@@ -10,12 +10,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Category',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('description', models.CharField(max_length=200)),
-            ],
-        ),
-    ]
+    migrations.CreateModel(
+        name='Category',
+        fields=[
+            ('name', models.CharField(max_length=100, primary_key=True)),  # Set as primary key
+            ('description', models.CharField(max_length=200)),
+        ],
+    ),
+]
