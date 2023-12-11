@@ -174,15 +174,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_FILE_PATH = "sent_emails"
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'theonlineartgalleryhl@gmail.com'
-EMAIL_HOST_PASSWORD = 'dflhabzpaqlpfsjq'
-DEFAULT_FROM_EMAIL = 'theonlineartgalleryhl@gmail.com'
-SERVER_EMAIL = 'theonlineartgalleryhl@gmail.com'
-
