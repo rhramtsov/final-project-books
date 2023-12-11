@@ -19,7 +19,6 @@ urlpatterns = [
     path('cartitems', views.cartitems, name="cartitems"),    
     path('logout', logout_view, name='logout'),
     path('register', views.register, name='register'),
-    path('contact-us', views.contact_us, name='contact_us'),
 ]
 
 if settings.DEBUG:
