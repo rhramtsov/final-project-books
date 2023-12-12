@@ -14,7 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import logging
 import os
-# from decouple import Csv, config
+
 
 logging.basicConfig(level=logging.DEBUG)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "auction.settings")
@@ -64,7 +64,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-    "https://github.com"
+    "https://github.com/rhramtsov/final-project-books",
     
     
 ]
@@ -161,8 +161,9 @@ SECRET_KEY = 'django-insecure-csq+#ivj($6@7pb7x4u62+!2pv=nn@wyl!w4av^swkh6_&8afo
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 DEBUG = True
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static')]
 ALLOWED_HOSTS = ['*']
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
